@@ -1,0 +1,130 @@
+﻿<Window x:Class="AdminKafe.Windows.GlavWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:AdminKafe.Windows"
+        xmlns:VM="clr-namespace:AdminKafe.ViewModels"
+        mc:Ignorable="d"
+    Title="GlavWindow" Height="700" Width="1350" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="{x:Null}">
+    <Window.DataContext>
+        <VM:AdminClassVM/>
+    </Window.DataContext>
+    
+    <Grid Margin="7,5,7,10" Background="White">
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="10" ShadowDepth="4" Direction="270" Color="Black" Opacity="0.7"/>
+        </Grid.Effect>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--Title-->
+            <Grid Grid.Row="0" Grid.ColumnSpan="2" MouseDown="Grid_MouseDown">
+                <materialDesign:ColorZone
+  Mode="Inverted"
+  Padding="16" Background="#007bab">
+                    <DockPanel>
+                        <StackPanel
+      Orientation="Horizontal">
+                            <ToggleButton x:Name="MenuIcon" IsChecked="False"
+        Style="{DynamicResource MaterialDesignHamburgerToggleButton}" Foreground="White" Click="ToggleButton_Click"/>
+                            <TextBlock Foreground="White"
+        VerticalAlignment="Center"
+        Margin="16 0 0 0"
+          FontSize="18" FontWeight="DemiBold">Меню</TextBlock>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <Button  Style="{StaticResource MaterialDesignIconButton}"  ToolTip="Настройки" Width="50" Height="50" Margin="10,-5" Click="Button_Click_3">
+                                <materialDesign:PackIcon   Kind="Settings" Width="30" Height="30" Foreground="White"/>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignRaisedButton}" Background="#117d9f" Width="35" Height="30" Margin="1" Padding="0,6,0,0" Click="Button_Click">
+                                <materialDesign:PackIcon Kind="WindowMinimize" Width="30" Height="30" Foreground="White"/>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignRaisedButton}" Background="#117d9f" Width="35" Height="30" Margin="1" Padding="0,2,0,0" Click="Button_Click_2">
+                                <materialDesign:PackIcon Kind="WindowMaximize" Width="25" Height="25"  Foreground="White"/>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignRaisedButton}" Background="#c62828" Width="35" Height="30" Margin="1" Padding="0" Click="Button_Click_1">
+                                <materialDesign:PackIcon Kind="Close" Width="30" Height="30"  Foreground="White"/>
+                            </Button>
+                        </StackPanel>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+            </Grid>
+            <!--Left Menu-->
+            <Grid x:Name="MenuGrid" Grid.Row="1" Grid.Column="0" Width="70">
+                <Grid Margin="0,0,5,0" Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.Effect>
+                        <DropShadowEffect BlurRadius="15" ShadowDepth="1" Direction="0" Color="Black" Opacity="0.5"/>
+                    </Grid.Effect>
+                    <Grid>
+                        <StackPanel>
+                            <materialDesign:PackIcon Kind="ChefHat" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" Height="45" Width="45" Foreground="#FF838383" />
+                            <TextBlock x:Name="Fitnestext" Text="Кафе" FontSize="15" HorizontalAlignment="Center" Foreground="#FF838383" Visibility="Hidden"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <ListView Foreground="#DD2C2C2C" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                            <ListViewItem PreviewMouseLeftButtonUp="ListViewItem_PreviewMouseLeftButtonUp" >
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <materialDesign:PackIcon Kind="AccountMultiplePlus" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,0,15,0" Height="40" Width="40" Foreground="#FF736D6D"/>
+                                    <TextBlock Text="Официант" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF3F3F3F"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem PreviewMouseLeftButtonUp="ListViewItem_PreviewMouseLeftButtonUp_1">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <materialDesign:PackIcon Kind="TableChair" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,0,15,0" Height="40" Width="40" Foreground="#FF736D6D"/>
+                                    <TextBlock Text="Добавить стол" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF3F3F3F"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem PreviewMouseLeftButtonUp="ListViewItem_PreviewMouseLeftButtonUp_2">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <materialDesign:PackIcon Kind="Cart" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,0,15,0" Height="40" Width="40" Foreground="#FF736D6D"/>
+                                    <TextBlock Text="Товар" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF3F3F3F"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem PreviewMouseLeftButtonUp="ListViewItem_PreviewMouseLeftButtonUp_3">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <materialDesign:PackIcon Kind="Shaker" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,0,15,0" Height="40" Width="40" Foreground="#FF736D6D"/>
+                                    <TextBlock Text="Создать рецепт" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF3F3F3F"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem PreviewMouseLeftButtonUp="ListViewItem_PreviewMouseLeftButtonUp_4">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <materialDesign:PackIcon Kind="Pasta" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,0,15,0" Height="40" Width="40" Foreground="#FF736D6D"/>
+                                    <TextBlock Text="Добавить блюда" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF3F3F3F"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem PreviewMouseLeftButtonUp="ListViewItem_PreviewMouseLeftButtonUp_6">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <materialDesign:PackIcon Kind="ClipboardTextMultipleOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,0,15,0" Height="40" Width="40" Foreground="#FF736D6D"/>
+                                    <TextBlock Text="Добавить расходы" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF3F3F3F"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem PreviewMouseLeftButtonUp="ListViewItem_PreviewMouseLeftButtonUp_5">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <materialDesign:PackIcon Kind="ChartArc" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,0,15,0" Height="40" Width="40" Foreground="#FF736D6D"/>
+                                    <TextBlock Text="Все отчеты" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF3F3F3F"/>
+                                </StackPanel>
+                            </ListViewItem>
+                        </ListView>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <!--Lists Grid-->
+            <Grid  Grid.Column="1" Grid.Row="1">
+                <Frame x:Name="GlavGrid" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

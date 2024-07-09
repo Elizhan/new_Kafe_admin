@@ -1,0 +1,55 @@
+﻿<Window x:Class="AdminKafe.Windows.AddKafeName"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdminKafe.Windows"
+        xmlns:VM="clr-namespace:AdminKafe.ViewModels"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Login" Height="350" Width="700" Background="{x:Null}"  WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+    <Grid Background="White" Margin="3,5,10,10">
+        <Grid.Resources>
+            <VM:AddCafeName x:Key="myDate"/>
+        </Grid.Resources>
+        <Grid.DataContext>
+            <Binding Source="{StaticResource myDate}"></Binding>
+        </Grid.DataContext>
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="10" Direction="270" Opacity="0.5" ShadowDepth="0"/>
+        </Grid.Effect>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Height="4" Background="#007bab"/>
+        <Canvas Grid.Row="1" Background="White">
+            <TextBox materialDesign:HintAssist.Hint="Названия кафе"  Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" materialDesign:TextFieldAssist.HasClearButton="True" Width="343" BorderBrush="#FF007BAB" Style="{StaticResource MaterialDesignFloatingHintTextBox}" CaretBrush="#FF007BAB" Canvas.Left="173" Canvas.Top="65" FontSize="14"/>
+            <materialDesign:PackIcon Kind="Home" Canvas.Left="135" Canvas.Top="78" Height="29" Width="30" Foreground="{DynamicResource IconColor}" />
+            <TextBox materialDesign:HintAssist.Hint="Место раположения" Text="{Binding Adress,UpdateSourceTrigger=PropertyChanged}" materialDesign:TextFieldAssist.HasClearButton="True" Width="343" BorderBrush="#FF007BAB" Style="{StaticResource MaterialDesignFloatingHintTextBox}" CaretBrush="#FF007BAB" Canvas.Left="173" Canvas.Top="111" FontSize="14"/>
+            <materialDesign:PackIcon Kind="MapMarker" Canvas.Left="133" Canvas.Top="127" Height="25" Width="30" Foreground="{DynamicResource IconColor}" />
+            <Button Command="{Binding UpDateCommand}" Padding="0" Background="#FF007BAB" Canvas.Left="347" Canvas.Top="276" Width="152" Height="35">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="ContentSaveSettings" Foreground="White" FontWeight="Bold" Width="20" Height="20" Margin="-2,0,0,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Сохранить" Foreground="White" VerticalAlignment="Center" Margin="1,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <Button Padding="0" Background="#FF007BAB" Canvas.Left="512" Canvas.Top="276" Width="152" Height="35" Click="Button_Click">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Undo" Foreground="White" FontWeight="Bold" Width="20" Height="20" Margin="-2,0,0,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Закрыть окно" Foreground="White" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <materialDesign:PackIcon Kind="Palette" Canvas.Left="136" Canvas.Top="195" Height="29" Width="30" Foreground="{DynamicResource IconColor}" />
+            <ComboBox                 
+                IsReadOnly="True" Text="{Binding Fon,UpdateSourceTrigger=PropertyChanged}"
+                materialDesign:HintAssist.Hint="Изменить фон" IsEditable="True" Width="343" Canvas.Left="173" Canvas.Top="199" Height="25" BorderThickness="0,0,0,1" BorderBrush="#FF007BAB">
+                <TextBlock Text="Fon1"/>
+                <ComboBoxItem Content="Fon2"/>
+                <ComboBoxItem Content="Fon3"/>
+                <ComboBoxItem Content="Fon4"/>
+            </ComboBox>
+        </Canvas>
+    </Grid>
+</Window>
+

@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\Busket.png" />
+    <None Remove="Images\Food1.png" />
+    <None Remove="Images\Food2.png" />
+    <None Remove="Images\images.jfif" />
+    <None Remove="Images\images1.jfif" />
+    <None Remove="Images\Person.JPG" />
+    <None Remove="Images\search2.png" />
+    <None Remove="View\Windows\PageMenu\Food.png" />
+    <None Remove="View\Windows\PageMenu\Food1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignColors" Version="2.0.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Busket.png" />
+    <Resource Include="Images\Food1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Food2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\images.jfif" />
+    <Resource Include="Images\images1.jfif" />
+    <Resource Include="Images\Person.JPG">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\search2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="View\Windows\PageMenu\Food.png" />
+    <Resource Include="View\Windows\PageMenu\Food1.png" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,132 @@
+﻿<Page x:Class="AdminKafe.Windows.PageMenu.AddStol"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdminKafe.Windows.PageMenu"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:VM="clr-namespace:AdminKafe.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="1100"
+      Title="AddWaiter">
+
+    <Grid>
+        <Grid.Resources>
+            <VM:AddTableVM x:Key="mydata"/>
+        </Grid.Resources>
+        <Grid.DataContext>
+            <Binding Source="{StaticResource mydata}"></Binding>
+        </Grid.DataContext>
+        <Grid Margin="10" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="210"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Canvas>
+                    <materialDesign:PackIcon Kind="TableChair" Foreground="#FF949494" Width="105" Height="122" Canvas.Left="74" Canvas.Top="20"/>
+                    <materialDesign:PackIcon Kind="Animation" Canvas.Left="280" Canvas.Top="32" Height="29" Width="30" Foreground="{DynamicResource IconColor}" />
+                    <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
+                        materialDesign:HintAssist.Hint="Добавить категорию"  materialDesign:TextFieldAssist.HasClearButton="True" Width="326" BorderBrush="#FF007BAB" Style="{StaticResource MaterialDesignFloatingHintTextBox}" CaretBrush="#FF007BAB" Canvas.Left="743" Canvas.Top="20" FontSize="14"/>
+                    <materialDesign:PackIcon Kind="ExpandAll" Canvas.Left="705" Canvas.Top="36" Height="25" Width="30" Foreground="{DynamicResource IconColor}" />
+                    <Button Padding="0" Background="#FF007BAB" Canvas.Left="917" Canvas.Top="163" Width="152" Height="35">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Delete" Foreground="White" FontWeight="Bold" Width="20" Height="20" Margin="-2,0,0,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Очистит" Foreground="White" VerticalAlignment="Center" Margin="1,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button
+                        Command="{Binding Test}"
+                        Padding="0" Background="#FF007BAB" Canvas.Left="760" Canvas.Top="163" Width="152" Height="35">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="LeadPencil" Foreground="White" FontWeight="Bold" Width="20" Height="20" Margin="-2,0,0,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Изменит" Foreground="White" VerticalAlignment="Center" Margin="1,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Padding="0" 
+                            Command="{Binding CreateCommand}"
+                            Background="#FF007BAB" Canvas.Left="603" Canvas.Top="163" Width="152" Height="35">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ContentSaveSettings" Foreground="White" FontWeight="Bold" Width="20" Height="20" Margin="-2,0,0,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Сохранить" Foreground="White" VerticalAlignment="Center" Margin="1,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <TextBox 
+                        Text="{Binding TableName, UpdateSourceTrigger=PropertyChanged}"
+                        materialDesign:HintAssist.Hint="Название стола"  materialDesign:TextFieldAssist.HasClearButton="True" Width="260" BorderBrush="#FF007BAB" Style="{StaticResource MaterialDesignFloatingHintTextBox}" CaretBrush="#FF007BAB" Canvas.Left="317" Canvas.Top="58" FontSize="14"/>
+                    <materialDesign:PackIcon Kind="TableChair" Canvas.Left="281" Canvas.Top="74" Height="29" Width="30" Foreground="{DynamicResource IconColor}" />
+                    <ComboBox x:Name="ComboBox1"
+                        ItemsSource="{Binding AllLocation,UpdateSourceTrigger=PropertyChanged}"
+                         DisplayMemberPath="Name" SelectedItem="{Binding SelectedLocation}"
+                        IsEnabled="{Binding IsChecked, ElementName=RadioTarif}" 
+                        materialDesign:HintAssist.Hint="Тарифи" 
+                        IsEditable="True" Canvas.Left="318" Canvas.Top="34" FontSize="14" Width="260" BorderBrush="#FF007BAB" Background="White" Foreground="Black" Style="{x:Null}" BorderThickness="0,0,0,2" Height="27">
+
+                    </ComboBox>
+                    <Button 
+                        Command="{Binding CreateLocationCommand}"
+                        Padding="0" Background="#FF007BAB" Canvas.Left="917" Canvas.Top="71" Width="152" Height="35">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ContentSaveSettings" Foreground="White" FontWeight="Bold" Width="20" Height="20" Margin="-2,0,0,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Сохранить" Foreground="White" VerticalAlignment="Center" Margin="1,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button 
+                        Command="{Binding ShowWindowCommand}"
+                        Padding="0" Background="#FF007BAB" Canvas.Left="611" Canvas.Top="31" Width="26" Height="34">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Add" Foreground="White" FontWeight="Bold" Width="20" Height="20" Margin="-2,0,0,0" VerticalAlignment="Center"/>
+                           
+                        </StackPanel>
+                    </Button>
+                </Canvas>
+            </Grid>
+            <Grid Grid.Row="1" Background="#4C949494" >
+                <TextBox Style="{DynamicResource stylePass}" Height="30" Width="250" FontSize="15" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Tag="Искать" Background="White"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <DataGrid 
+                    
+                    x:Name="dbGrid"
+                    FontSize="13"
+                    SelectedItem="{Binding SelectedDateObject, UpdateSourceTrigger=PropertyChanged}"
+                    ItemsSource="{Binding AllObjectDate , UpdateSourceTrigger=PropertyChanged}"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{DynamicResource grid_xml}" IsReadOnly="True"  Margin="0,8,0,0"  CanUserAddRows="False" ColumnHeaderStyle="{DynamicResource hederstyle}"  VerticalScrollBarVisibility="Auto"  HeadersVisibility="Column"
+                   AutoGenerateColumns="False" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="№" Binding="{Binding Path=Id}" Width="50" />
+                        <DataGridTextColumn Binding="{Binding Path=CatName}" Header="Название категория" />
+                        <DataGridTextColumn Binding="{Binding Path=TableName}" Header="Название стола"/>
+                        <DataGridTemplateColumn Header="Изменить" Width="100" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Click="Button_Click"  
+                                            Command="{Binding Path=DataContext.ChangeTableCommand,       
+ RelativeSource= {RelativeSource FindAncestor,
+  AncestorType={x:Type DataGrid}}}"
+                                        Background="{x:Null}"  BorderThickness="0,0,0,0" Cursor="Hand">
+                                        <materialDesign:PackIcon Kind="LeadPencil" Width="20" Margin="0,-18,0,0" Foreground="#FF007BAB"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Удалить" Width="100" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                       Command="{Binding Path=DataContext.DeleteCommand,       
+ RelativeSource= {RelativeSource FindAncestor,
+  AncestorType={x:Type DataGrid}}}"
+                                        Background="{x:Null}" Width="100"  BorderThickness="0,0,0,0" Cursor="Hand">
+                                        <materialDesign:PackIcon Kind="Delete" Margin="0,-18,0,0" Width="20" Foreground="#FF007BAB"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

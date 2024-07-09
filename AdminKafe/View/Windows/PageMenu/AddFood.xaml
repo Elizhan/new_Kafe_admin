@@ -1,0 +1,215 @@
+﻿<Page x:Class="AdminKafe.Windows.PageMenu.AddFood"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:AdminKafe.Windows.PageMenu"
+      xmlns:VM="clr-namespace:AdminKafe.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="1100"
+      Title="AddFood">
+    <Page.Resources>
+        <BitmapImage x:Key="DefoultImage" UriSource="Food1.png"/>
+        <BitmapImage x:Key="DefoultImage1" UriSource="../../../Images/Food2.png"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.Resources>
+            <VM:AddFoodVM x:Key="mydata"/>
+        </Grid.Resources>
+        <Grid.DataContext>
+            <Binding Source="{StaticResource mydata}"></Binding>
+        </Grid.DataContext>
+        <Grid Margin="10" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="230"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Canvas>
+                    <Image x:Name="imgBox"
+                        
+                        Width="193" 
+                         Height="129" Source="{Binding ImgSourse,UpdateSourceTrigger=PropertyChanged,TargetNullValue={StaticResource DefoultImage1}}" Canvas.Left="41" Canvas.Top="29" Stretch="Fill"/>
+
+                    <Image x:Name="imgBox2"
+                        
+                        Width="193" Height="129" Source="{Binding ImgSourse, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="641" Canvas.Top="29" Stretch="Fill"/>
+
+                    <materialDesign:PackIcon Kind="Menu" Canvas.Left="279" Canvas.Top="46" Height="24" Width="30" Foreground="{DynamicResource IconColor}" />
+                    <TextBox  Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"
+                        materialDesign:HintAssist.Hint="Цена блюда"  materialDesign:TextFieldAssist.HasClearButton="True" Width="260" BorderBrush="#FF007BAB" Style="{StaticResource MaterialDesignFloatingHintTextBox}" CaretBrush="#FF007BAB" Canvas.Left="317" Canvas.Top="106" FontSize="14"/>
+                    <materialDesign:PackIcon Kind="Numeric10BoxMultiple" Canvas.Left="280" Canvas.Top="122" Height="26" Width="30" Foreground="{DynamicResource IconColor}" />
+                    <ComboBox  ItemsSource="{Binding  AllFoodMenu,UpdateSourceTrigger=PropertyChanged}"
+                         DisplayMemberPath="Name" SelectedItem="{Binding SelectedFood}"
+                        IsEnabled="{Binding Path=IsChecked, ElementName=RadioTarif}" materialDesign:HintAssist.Hint="Тарифи"  IsEditable="True" Canvas.Left="316" Canvas.Top="44" FontSize="14" Width="260" BorderBrush="#FF007BAB" Background="White" Foreground="Black" Style="{x:Null}" BorderThickness="0,0,0,2" Height="28">
+
+                    </ComboBox>
+                    <Button Padding="0" Background="#FF007BAB" Canvas.Left="918" Canvas.Top="186" Width="152" Height="34">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Delete" Foreground="White" FontWeight="Bold" Width="20" Height="20" Margin="-2,0,0,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Очистит" Foreground="White" VerticalAlignment="Center" Margin="1,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Padding="0" Background="#FF007BAB" Canvas.Left="761" Canvas.Top="186" Width="152" Height="34">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="LeadPencil" Foreground="White" FontWeight="Bold" Width="20" Height="20" Margin="-2,0,0,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Изменит" Foreground="White" VerticalAlignment="Center" Margin="1,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding CreateCommand}"
+                            CommandParameter="{Binding ElementName=imgBox}"
+                            Padding="0" Background="#FF007BAB" Canvas.Left="604" Canvas.Top="186" Width="152" Height="34">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ContentSaveSettings" Foreground="White" FontWeight="Bold" Width="20" Height="20" Margin="-2,0,0,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Сохранить" Foreground="White" VerticalAlignment="Center" Margin="1,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <materialDesign:PackIcon Kind="Pasta" Canvas.Left="280" Canvas.Top="80" Height="29" Width="30" Foreground="{DynamicResource IconColor}" />
+                    <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
+                        materialDesign:HintAssist.Hint="Название блюда"  materialDesign:TextFieldAssist.HasClearButton="True" Width="260" BorderBrush="#FF007BAB" Style="{StaticResource MaterialDesignFloatingHintTextBox}" CaretBrush="#FF007BAB" Canvas.Left="317" Canvas.Top="68" FontSize="14"/>
+                    <Button 
+                        Click="Button_Click"
+                        Command="{Binding ImgSourceCommand}"
+                        CommandParameter="{Binding ElementName=imgBox}"
+                        Padding="0" Background="#FF007BAB" Canvas.Left="41" Canvas.Top="163" Width="193" Height="26">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ImagePlus" Foreground="White" FontWeight="Bold" Width="20" Height="20" Margin="-2,0,0,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Добвить фото" Foreground="White" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13"/>
+                        </StackPanel>
+                    </Button>
+                    <Button  
+                       Command="{Binding Test}"
+                        Padding="0" Background="#FF007BAB" Canvas.Left="41" Canvas.Top="194" Width="193" Height="26">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Delete" Foreground="#FFD63333" FontWeight="Bold" Width="20" Height="20" Margin="-2,0,0,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Удалить фото" Foreground="White" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="13"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Click="Button_Click_2" Padding="0" Background="#FF007BAB" Canvas.Left="594" Canvas.Top="45" Width="34" Height="34">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Add" Foreground="White" FontWeight="Bold" Width="20" Height="20" Margin="-2,0,0,0" VerticalAlignment="Center"/>
+
+                        </StackPanel>
+                    </Button>
+                </Canvas>
+            </Grid>
+            <Grid Grid.Row="1" Background="#4C949494" >
+                <TextBox 
+                    Text="{Binding SearchFood,UpdateSourceTrigger=PropertyChanged}"
+                    Style="{DynamicResource stylePass}" Height="30" Width="250" FontSize="15" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Tag="Искать" Background="White"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <DataGrid
+                    ItemsSource="{Binding AllDate, UpdateSourceTrigger=PropertyChanged}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" 
+                    SelectedItem="{Binding SelectedDateObject,UpdateSourceTrigger=PropertyChanged}"
+                    Style="{DynamicResource grid_xml_img}" 
+                    IsReadOnly="True" FontSize="18" 
+                    Margin="0,8,0,0"  CanUserAddRows="False" 
+                    ColumnHeaderStyle="{DynamicResource hederstyle}"  
+                    VerticalScrollBarVisibility="Auto" 
+                    HeadersVisibility="Column"
+                    AutoGenerateColumns="False" >
+                    <DataGrid.Columns>
+
+                        <DataGridTemplateColumn Header="№" Width="50" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Id}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Название блюда" Width="350" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Цена блюда" Width="150" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock VerticalAlignment="Center" 
+                                               Text="{Binding Price}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Картинка блюда" Width="250" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image   Height="110" Source="{Binding Image, TargetNullValue={StaticResource DefoultImage}}" >
+
+                                    </Image>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Изменить" Width="100" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Background="{x:Null}"  BorderThickness="0,0,0,0" Cursor="Hand">
+                                        <materialDesign:PackIcon 
+                                            Kind="LeadPencil" 
+                                            Height="25"
+                                            Width="25" Foreground="#FF007BAB"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Удалить" Width="100" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                 Command="{Binding Path=DataContext.DeleteCommand,       
+                 RelativeSource= {RelativeSource FindAncestor,
+                 AncestorType={x:Type DataGrid}}}"
+                                        Background="{x:Null}" Width="100"
+                                            Height="100"
+                                            BorderThickness="0,0,0,0" Cursor="Hand">
+                                        <materialDesign:PackIcon Kind="Delete" Width="100"
+                                                                 Height="25"
+                                                                 Margin="-50,0,0,0"
+                                                                 Foreground="#FF007BAB"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                    <DataGrid.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.ContainerStyle>
+                                <Style TargetType="{x:Type GroupItem}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type GroupItem}">
+                                                <Expander x:Name="exp" IsExpanded="True"
+                                                 Background="#3F10B3FF"
+                                                 Foreground="Black" Margin="0,-2,0,0" >
+                                                    <Expander.Header>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="{Binding Name}"
+                                                                   Margin="10,0,0,0"
+                                                                   FontSize="16" HorizontalAlignment="Center"  />
+                                                        </StackPanel>
+
+                                                    </Expander.Header>
+                                                    <ItemsPresenter/>
+                                                </Expander>
+
+
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </GroupStyle.ContainerStyle>
+                        </GroupStyle>
+                    </DataGrid.GroupStyle>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

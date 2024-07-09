@@ -1,0 +1,97 @@
+﻿<Window x:Class="AdminKafe.View.Windows.AddMenuFoodWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdminKafe.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:VM="clr-namespace:AdminKafe.ViewModels"
+        mc:Ignorable="d"
+        x:Name="AddMenu"
+        Title="Login" Height="550" Width="500" Background="{x:Null}"  WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+    <Grid Background="White" Margin="3,5,10,10">
+        <Grid.Resources>
+            <VM:AddFoodVM x:Key="mydata"/>
+        </Grid.Resources>
+        <Grid.DataContext>
+            <Binding Source="{StaticResource mydata}"></Binding>
+        </Grid.DataContext>
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="10" Direction="270" Opacity="0.5" ShadowDepth="0"/>
+        </Grid.Effect>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border Background="#FF007BAB" />
+        <Button HorizontalAlignment="Right"
+                Style="{StaticResource MaterialDesignRaisedButton}" 
+                Background="#c62828" Width="35" Height="30" Margin="1" 
+                Padding="0" Click="Button_Click"
+                CommandParameter="{Binding ElementName=AddMenu}" >
+            <materialDesign:PackIcon Kind="Close" Width="30" Height="30"  Foreground="White"/>
+        </Button>
+        <StackPanel Margin="50,0,0,0" Grid.Row="1" Orientation="Horizontal"  >
+            <TextBox materialDesign:HintAssist.Hint="Введите названия менью" Background="White" 
+                     BorderThickness="0,0,0,2" 
+                    Height="40" Width="250"
+                     Text="{Binding Name}"
+                     BorderBrush="#FF007BAB" 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                      FontSize="14" Foreground="#007bab" CaretBrush="#FF007BAB" />
+
+
+
+            <Button Command="{Binding MenuFoodCommand}"  Height="35" Margin="20,20,0,0" Style="{StaticResource MaterialDesignRaisedLightButton}"
+Background="#007bab" Width="100" HorizontalAlignment="Left"
+    materialDesign:ButtonAssist.CornerRadius="5" >
+
+                <TextBlock Text="Добавить" Foreground="White"/>
+            </Button>
+        </StackPanel>
+
+        <DataGrid  x:Name="dbGrid"
+                    Grid.Row="2"
+                   FontSize="13"
+                   ItemsSource="{Binding AllFoodMenu, UpdateSourceTrigger=PropertyChanged}"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{DynamicResource grid_xml}" IsReadOnly="True"  Margin="0,8,0,0"  CanUserAddRows="False" ColumnHeaderStyle="{DynamicResource hederstyle}"  VerticalScrollBarVisibility="Auto"  HeadersVisibility="Column"
+                   AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Binding="{Binding Path=Id}" Width="50" />
+                <DataGridTextColumn Binding="{Binding Path=Name}" Header="Название категория" />
+                
+                <DataGridTemplateColumn Header="Изменить" Width="100" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button 
+                                            Command="{Binding Path=DataContext.ChangeTableCommand,       
+ RelativeSource= {RelativeSource FindAncestor,
+  AncestorType={x:Type DataGrid}}}"
+                                        Background="{x:Null}"  BorderThickness="0,0,0,0" Cursor="Hand">
+                                <materialDesign:PackIcon Kind="LeadPencil" Width="20" Margin="0,-18,0,0" Foreground="#FF007BAB"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Удалить" Width="100" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                       Command="{Binding Path=DataContext.DeleteTableCommand,       
+ RelativeSource= {RelativeSource FindAncestor,
+  AncestorType={x:Type DataGrid}}}"
+                                        Background="{x:Null}" Width="100"  BorderThickness="0,0,0,0" Cursor="Hand">
+                                <materialDesign:PackIcon Kind="Delete" Margin="0,-18,0,0" Width="20" Foreground="#FF007BAB"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+    </Grid>
+
+</Window>
